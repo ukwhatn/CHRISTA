@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:10.7.1
+    volumes:
+      - ./maria_data:/var/lib/mysql
+      - ./init_db:/docker-entrypoint-initdb.d
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: application
+      MYSQL_PASSWORD: applicationpassword
+    networks:
+      - nw_christa
+  bot:
+    build: ./dockerfiles/bot
+    volumes:
+      - ./bot:/opt
+    networks:
+      - nw_christa
+    restart: always
+  crawler:
+    build: ./dockerfiles/crawler
+    volumes:
+      - ./crawler:/opt
+    networks:
+      - nw_christa
+    restart: always
+
+volumes:
+  maria_data:
+
+networks:
+  nw_christa:
+    driver: bridge

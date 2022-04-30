@@ -1,0 +1,14 @@
+Use Master;
+
+ALTER TABLE `config`
+    DISABLE KEYS;
+INSERT INTO `config` (`id`, `name`, `value`)
+VALUES
+	(1, 'discord_oauth2_client_id', 'CLIENTID'),
+	(2, 'discord_oauth2_client_secret', 'CLIENTSECRET'),
+	(3, 'discord_oauth2_redirect_path', 'REDIRECTPATH'),
+	(4, 'root_uri', 'ROOTURI'),
+	(5, 'bot_token', 'BOTTOKEN'),
+	(6, 'bot_owner_id', 'BOTOWNERID');
+ALTER TABLE `config`
+    ENABLE KEYS;
